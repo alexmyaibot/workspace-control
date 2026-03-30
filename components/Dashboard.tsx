@@ -112,21 +112,9 @@ const agentDetails: Record<AgentId, {
     workspace: 'health-tracker',
     status: 'Connected',
     model: 'data-sync',
-    tasks: ['Sync latest health data from Health app', 'Set up API integration for real-time updates'],
-    stats: {
-      'Current Weight': '210 lbs',
-      'Starting Weight': '220 lbs',
-      'Weight Loss': '10 lbs',
-      'BMI': '28.3',
-      'Steps Today': '—',
-      'Workouts This Week': '—',
-      'Active Minutes': '—',
-      'Distance': '—',
-      'Calories Burned': '—',
-      'Heart Rate': '—',
-      'Data Source': 'Health App (manual)',
-      'Last Updated': 'Daily',
-    },
+    tasks: ['Sync latest health data from Health app', 'Set up HealthKit API for real-time updates'],
+    // Note: stats are dynamically populated from healthData state in component
+    stats: {},
   },
 }
 
@@ -138,10 +126,33 @@ export function Dashboard() {
     month: 1204560,
     cost: '$12.40',
   })
+  const [healthData, setHealthData] = useState({
+    current_lbs: 210,
+    start_lbs: 220,
+    bmi: 28.3,
+    weight_loss: 10,
+  })
 
   useEffect(() => {
-    // Token stats would be fetched from your cost tracking API
-    // For now using placeholder data
+    // Fetch real health data from health_metrics.json
+    const fetchHealthData = async () => {
+      try {
+        const response = await fetch('/api/health')
+        if (response.ok) {
+          const data = await response.json()
+          setHealthData({
+            current_lbs: data.weight?.current_lbs || 210,
+            start_lbs: data.weight?.start_lbs || 220,
+            bmi: data.stats?.bmi || 28.3,
+            weight_loss: data.stats?.weight_loss || 10,
+          })
+        }
+      } catch (e) {
+        // Fallback to hardcoded values if API unavailable
+        console.log('Using default health data')
+      }
+    }
+    fetchHealthData()
   }, [])
 
   const handleCardClick = (agentId: AgentId) => {
@@ -292,7 +303,29 @@ export function Dashboard() {
                   </div>
 
                   {/* Stats (if available) */}
-                  {agent.stats && (
+                  {agentId === 'health' ? (
+                    <div className="pt-4 border-t border-gray-700">
+                      <p className="text-gray-400 text-sm font-semibold mb-3">Current Metrics (from Health App)</p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-gray-750 rounded p-2">
+                          <p className="text-gray-400 text-xs mb-1">Current Weight</p>
+                          <p className="text-white font-bold">{healthData.current_lbs} lbs</p>
+                        </div>
+                        <div className="bg-gray-750 rounded p-2">
+                          <p className="text-gray-400 text-xs mb-1">Starting Weight</p>
+                          <p className="text-white font-bold">{healthData.start_lbs} lbs</p>
+                        </div>
+                        <div className="bg-gray-750 rounded p-2">
+                          <p className="text-gray-400 text-xs mb-1">Weight Loss</p>
+                          <p className="text-green-400 font-bold">{healthData.weight_loss} lbs ✓</p>
+                        </div>
+                        <div className="bg-gray-750 rounded p-2">
+                          <p className="text-gray-400 text-xs mb-1">BMI</p>
+                          <p className="text-white font-bold">{healthData.bmi}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : agent.stats && Object.keys(agent.stats).length > 0 ? (
                     <div className="pt-4 border-t border-gray-700">
                       <p className="text-gray-400 text-sm font-semibold mb-3">Stats</p>
                       <div className="grid grid-cols-2 gap-3">
@@ -304,7 +337,7 @@ export function Dashboard() {
                         ))}
                       </div>
                     </div>
-                  )}
+                  ) : null}
 
                   {/* External Links */}
                   {agent.link && (
