@@ -9,6 +9,7 @@ import { FlipchartsCard } from './cards/FlipchartsCard'
 import { JadeHDSkinnCard } from './cards/JadeHDSkinnCard'
 import { GameMasterCard } from './cards/GameMasterCard'
 import { TikTokClipsCard } from './cards/TikTokClipsCard'
+import { AgentStatusCard } from './cards/AgentStatusCard'
 
 export function Dashboard() {
   const [archiveStats, setArchiveStats] = useState({
@@ -30,6 +31,7 @@ export function Dashboard() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <CardGrid>
+          <AgentStatusCard />
           <ArchiveCard stats={archiveStats} />
           <HealthTrackerCard />
           <FlipchartsCard />
