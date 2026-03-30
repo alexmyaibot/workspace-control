@@ -80,9 +80,8 @@ export function Dashboard() {
                 <div><span className="text-gray-400">Status:</span> <span className="text-yellow-400">Ready</span></div>
                 <div><span className="text-gray-400">Role:</span> <span className="text-white">Music Director</span></div>
               </div>
-              <div className="flex gap-2 mt-4">
-                <a href="#" className="text-blue-400 hover:text-blue-300 text-sm font-semibold flex-1">View Details →</a>
-                <a href="https://tuckersmedia.vercel.app" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 text-sm font-semibold flex-1">Flipcharts →</a>
+              <div className="mt-4">
+                <a href="https://tuckersmedia.vercel.app" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 text-sm font-semibold">Flipcharts →</a>
               </div>
             </div>
           </div>
