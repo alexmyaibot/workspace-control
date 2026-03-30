@@ -5,7 +5,19 @@ import { Header } from './Header'
 
 type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health'
 
-const agentDetails: Record<AgentId, { name: string; emoji: string; role: string; description: string; workspace: string; status: string; link?: string; linkText?: string }> = {
+const agentDetails: Record<AgentId, { 
+  name: string
+  emoji: string
+  role: string
+  description: string
+  workspace: string
+  status: string
+  model: string
+  tasks: string[]
+  stats?: Record<string, string | number>
+  link?: string
+  linkText?: string
+}> = {
   jade: {
     name: 'Jade',
     emoji: '💆',
@@ -13,6 +25,8 @@ const agentDetails: Record<AgentId, { name: string; emoji: string; role: string;
     description: 'Manages esthetician services, client bookings, pricing, and business growth for HD Skinn.',
     workspace: 'workspace-hd-skinn',
     status: 'Active',
+    model: 'gemma3:4b',
+    tasks: ['Schedule client consultations', 'Update pricing packages', 'Create social media content'],
   },
   clips: {
     name: 'Clips',
@@ -21,6 +35,14 @@ const agentDetails: Record<AgentId, { name: string; emoji: string; role: string;
     description: 'Creates viral TikTok content, analyzes trends, and manages short-form video strategy.',
     workspace: 'workspace-clips',
     status: 'Active',
+    model: 'phi4-mini',
+    tasks: ['Produce Ghost Elephant video', 'Analyze trending audio', 'Plan content calendar'],
+    stats: {
+      'Total Videos': 24,
+      'Avg Views': '8.5K',
+      'Best Performer': 'TikTok Trends #2',
+      'Engagement Rate': '12.3%',
+    },
   },
   polish: {
     name: 'Polish',
@@ -29,6 +51,8 @@ const agentDetails: Record<AgentId, { name: string; emoji: string; role: string;
     description: 'Manages nail salon services, client appointments, and business operations for Nails by Avery.',
     workspace: 'workspace-polish',
     status: 'Ready',
+    model: 'gemma3:4b',
+    tasks: ['Finalize service menu', 'Set pricing structure', 'Create booking system'],
   },
   maker: {
     name: 'Maker',
@@ -37,6 +61,8 @@ const agentDetails: Record<AgentId, { name: string; emoji: string; role: string;
     description: 'Manages That\'s God 3D printing projects, Etsy orders, and production workflow.',
     workspace: 'workspace-3d-printing',
     status: 'Active',
+    model: 'qwen3.5:9b',
+    tasks: ['Review pending Etsy orders', 'Optimize print settings', 'Update product photos'],
   },
   maestro: {
     name: 'Maestro',
@@ -45,6 +71,8 @@ const agentDetails: Record<AgentId, { name: string; emoji: string; role: string;
     description: 'Directs music for LDS services, manages hymn selections, and creates flipcharts for Primary lessons.',
     workspace: 'workspace-maestro',
     status: 'Ready',
+    model: 'qwen3.5:9b',
+    tasks: ['Plan next month\'s hymns', 'Create new flipcharts', 'Prepare practice materials'],
     link: 'https://willowaymedia.vercel.app/flipcharts/login.html',
     linkText: 'Flipchart Library',
   },
@@ -55,6 +83,8 @@ const agentDetails: Record<AgentId, { name: string; emoji: string; role: string;
     description: 'Indexes and searches your 6TB personal archive using semantic and full-text search.',
     workspace: 'workspace-archive',
     status: 'Active',
+    model: 'qwen3.5:9b',
+    tasks: ['Continue 6TB archive indexing', 'Test semantic search', 'Optimize search performance'],
   },
   gamemaster: {
     name: 'Game Master',
@@ -63,6 +93,8 @@ const agentDetails: Record<AgentId, { name: string; emoji: string; role: string;
     description: 'Designs games and manages Godot game development projects (Turntable & Microphone game).',
     workspace: 'workspace-game-master',
     status: 'Ready',
+    model: 'gemma3:4b',
+    tasks: ['Define game mechanics', 'Create character designs', 'Build first prototype'],
   },
   health: {
     name: 'Health Tracker',
@@ -71,23 +103,23 @@ const agentDetails: Record<AgentId, { name: string; emoji: string; role: string;
     description: 'Displays and tracks health metrics from your connected health app.',
     workspace: 'health-tracker',
     status: 'Connected',
+    model: 'data-sync',
+    tasks: ['Sync latest health data', 'Generate weekly report'],
   },
 }
 
 export function Dashboard() {
   const [expandedAgent, setExpandedAgent] = useState<AgentId | null>(null)
-  const [archiveStats, setArchiveStats] = useState({
-    totalFiles: 0,
-    lastIndexed: 'Never',
+  const [tokenStats] = useState({
+    today: 45230,
+    week: 287450,
+    month: 1204560,
+    cost: '$12.40',
   })
 
   useEffect(() => {
-    // Fetch archive stats from Supabase or local API
-    // For now, using placeholder data
-    setArchiveStats({
-      totalFiles: 1250,
-      lastIndexed: new Date().toLocaleDateString(),
-    })
+    // Token stats would be fetched from your cost tracking API
+    // For now using placeholder data
   }, [])
 
   const handleCardClick = (agentId: AgentId) => {
@@ -117,6 +149,29 @@ export function Dashboard() {
                 <p className="text-white text-3xl font-bold">8</p>
                 <p className="text-blue-300 text-sm">Subagents</p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Token Cost Tracker */}
+        <div className="mb-8 bg-gray-800 rounded-lg border border-gray-700 p-4">
+          <h2 className="text-sm font-semibold text-gray-400 mb-3">Token Cost Tracker</h2>
+          <div className="grid grid-cols-4 gap-3">
+            <div className="text-center">
+              <p className="text-gray-400 text-xs mb-1">Today</p>
+              <p className="text-white font-bold">{tokenStats.today.toLocaleString()}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-gray-400 text-xs mb-1">This Week</p>
+              <p className="text-white font-bold">{tokenStats.week.toLocaleString()}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-gray-400 text-xs mb-1">This Month</p>
+              <p className="text-white font-bold">{tokenStats.month.toLocaleString()}</p>
+            </div>
+            <div className="text-center bg-blue-900 rounded-lg p-2">
+              <p className="text-blue-300 text-xs mb-1">Est. Cost</p>
+              <p className="text-blue-100 font-bold text-lg">{tokenStats.cost}</p>
             </div>
           </div>
         </div>
@@ -180,9 +235,10 @@ export function Dashboard() {
                   </div>
                 </div>
                 
-                <div className="space-y-3 text-gray-300">
+                <div className="space-y-4 text-gray-300">
                   <p className="text-base leading-relaxed">{agent.description}</p>
                   
+                  {/* Model & Status Grid */}
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-700">
                     <div>
                       <p className="text-gray-400 text-sm font-semibold">Status</p>
@@ -191,11 +247,44 @@ export function Dashboard() {
                       </p>
                     </div>
                     <div>
+                      <p className="text-gray-400 text-sm font-semibold">Model</p>
+                      <p className="text-white font-mono text-sm">{agent.model}</p>
+                    </div>
+                    <div>
                       <p className="text-gray-400 text-sm font-semibold">Workspace</p>
-                      <p className="text-white font-mono text-sm">{agent.workspace}</p>
+                      <p className="text-white font-mono text-xs">{agent.workspace}</p>
                     </div>
                   </div>
 
+                  {/* Upcoming Tasks */}
+                  <div className="pt-4 border-t border-gray-700">
+                    <p className="text-gray-400 text-sm font-semibold mb-2">Upcoming Tasks</p>
+                    <ul className="space-y-1">
+                      {agent.tasks.map((task, idx) => (
+                        <li key={idx} className="text-sm text-gray-300 flex items-start gap-2">
+                          <span className="text-blue-400 mt-0.5">→</span>
+                          <span>{task}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Stats (if available) */}
+                  {agent.stats && (
+                    <div className="pt-4 border-t border-gray-700">
+                      <p className="text-gray-400 text-sm font-semibold mb-3">Stats</p>
+                      <div className="grid grid-cols-2 gap-3">
+                        {Object.entries(agent.stats).map(([key, value]) => (
+                          <div key={key} className="bg-gray-750 rounded p-2">
+                            <p className="text-gray-400 text-xs mb-1">{key}</p>
+                            <p className="text-white font-bold">{value}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* External Links */}
                   {agent.link && (
                     <div className="pt-4 border-t border-gray-700">
                       <a
