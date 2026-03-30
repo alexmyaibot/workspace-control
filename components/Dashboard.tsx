@@ -46,6 +46,7 @@ export function Dashboard() {
           <h2 className="text-xl font-bold text-white">Operations</h2>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Jade - HD Skinn */}
           <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-pink-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
             <div className="text-center">
