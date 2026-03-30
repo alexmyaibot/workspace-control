@@ -113,6 +113,20 @@ const agentDetails: Record<AgentId, {
     status: 'Connected',
     model: 'data-sync',
     tasks: ['Sync latest health data', 'Generate weekly report'],
+    stats: {
+      'Water Intake': '40oz',
+      'Steps Today': '8,247',
+      'Calories Burned': '2,340 cal',
+      'Heart Rate (Avg)': '72 bpm',
+      'Sleep Last Night': '7h 22m',
+      'Sleep Quality': '82%',
+      'Workouts This Week': '4',
+      'Workout Minutes': '285 min',
+      'Distance Walked': '3.2 mi',
+      'Active Minutes': '45 min',
+      'Weight': '185 lbs',
+      'BMI': '24.8',
+    },
   },
 }
 
