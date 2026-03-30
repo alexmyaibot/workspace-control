@@ -81,7 +81,7 @@ export function Dashboard() {
                 <div><span className="text-gray-400">Role:</span> <span className="text-white">Music Director</span></div>
               </div>
               <div className="mt-4">
-                <a href="https://tuckersmedia.vercel.app" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 text-sm font-semibold">Flipcharts →</a>
+                <a href="https://willowaymedia.vercel.app/flipcharts/login.html" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 text-sm font-semibold">Flipcharts →</a>
               </div>
             </div>
           </div>
