@@ -46,84 +46,92 @@ export function Dashboard() {
           <h2 className="text-xl font-bold text-white">Operations</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
           {/* Jade - HD Skinn */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-pink-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-pink-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
             <div className="text-center">
-              <span className="text-3xl block mb-2">💆</span>
-              <h3 className="font-bold text-white mb-1">Jade</h3>
+              <span className="text-2xl block mb-1">💆</span>
+              <h3 className="font-bold text-white text-sm mb-1">Jade</h3>
               <p className="text-gray-400 text-xs mb-2">HD Skinn</p>
-              <div className="text-green-400 text-xs font-semibold">Active</div>
+              <div className="text-green-400 text-xs font-semibold mb-2">Active</div>
+              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
             </div>
           </div>
 
           {/* Clips - TikTok */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-purple-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-purple-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
             <div className="text-center">
-              <span className="text-3xl block mb-2">🎬</span>
-              <h3 className="font-bold text-white mb-1">Clips</h3>
+              <span className="text-2xl block mb-1">🎬</span>
+              <h3 className="font-bold text-white text-sm mb-1">Clips</h3>
               <p className="text-gray-400 text-xs mb-2">TikTok Director</p>
-              <div className="text-green-400 text-xs font-semibold">Active</div>
+              <div className="text-green-400 text-xs font-semibold mb-2">Active</div>
+              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
             </div>
           </div>
 
           {/* Polish - Nails */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-red-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-red-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
             <div className="text-center">
-              <span className="text-3xl block mb-2">💅</span>
-              <h3 className="font-bold text-white mb-1">Polish</h3>
+              <span className="text-2xl block mb-1">💅</span>
+              <h3 className="font-bold text-white text-sm mb-1">Polish</h3>
               <p className="text-gray-400 text-xs mb-2">Nails by Avery</p>
-              <div className="text-yellow-400 text-xs font-semibold">Ready</div>
+              <div className="text-yellow-400 text-xs font-semibold mb-2">Ready</div>
+              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
             </div>
           </div>
 
           {/* Maker - 3D */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-orange-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-orange-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
             <div className="text-center">
-              <span className="text-3xl block mb-2">🖨️</span>
-              <h3 className="font-bold text-white mb-1">Maker</h3>
+              <span className="text-2xl block mb-1">🖨️</span>
+              <h3 className="font-bold text-white text-sm mb-1">Maker</h3>
               <p className="text-gray-400 text-xs mb-2">3D Printing</p>
-              <div className="text-green-400 text-xs font-semibold">Active</div>
+              <div className="text-green-400 text-xs font-semibold mb-2">Active</div>
+              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
             </div>
           </div>
 
           {/* Maestro - Music */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-blue-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-blue-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
             <div className="text-center">
-              <span className="text-3xl block mb-2">🎵</span>
-              <h3 className="font-bold text-white mb-1">Maestro</h3>
+              <span className="text-2xl block mb-1">🎵</span>
+              <h3 className="font-bold text-white text-sm mb-1">Maestro</h3>
               <p className="text-gray-400 text-xs mb-2">Music Leader</p>
-              <div className="text-yellow-400 text-xs font-semibold">Ready</div>
+              <div className="text-yellow-400 text-xs font-semibold mb-2">Ready</div>
+              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
             </div>
           </div>
 
           {/* Lexicon - Archive */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-cyan-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-cyan-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
             <div className="text-center">
-              <span className="text-3xl block mb-2">📖</span>
-              <h3 className="font-bold text-white mb-1">Lexicon</h3>
+              <span className="text-2xl block mb-1">📖</span>
+              <h3 className="font-bold text-white text-sm mb-1">Lexicon</h3>
               <p className="text-gray-400 text-xs mb-2">Archive Search</p>
-              <div className="text-green-400 text-xs font-semibold">Active</div>
+              <div className="text-green-400 text-xs font-semibold mb-2">Active</div>
+              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
             </div>
           </div>
 
           {/* Game Master - Games */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-green-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-green-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
             <div className="text-center">
-              <span className="text-3xl block mb-2">🎮</span>
-              <h3 className="font-bold text-white mb-1">Game Master</h3>
+              <span className="text-2xl block mb-1">🎮</span>
+              <h3 className="font-bold text-white text-sm mb-1">Game Master</h3>
               <p className="text-gray-400 text-xs mb-2">Game Design</p>
-              <div className="text-yellow-400 text-xs font-semibold">Ready</div>
+              <div className="text-yellow-400 text-xs font-semibold mb-2">Ready</div>
+              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
             </div>
           </div>
 
           {/* Health Tracker */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-green-500 transition-all hover:shadow-lg p-4 cursor-pointer hover:bg-gray-750">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-green-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
             <div className="text-center">
-              <span className="text-3xl block mb-2">💚</span>
-              <h3 className="font-bold text-white mb-1">Health</h3>
+              <span className="text-2xl block mb-1">💚</span>
+              <h3 className="font-bold text-white text-sm mb-1">Health</h3>
               <p className="text-gray-400 text-xs mb-2">Tracker</p>
-              <div className="text-green-400 text-xs font-semibold">Connected</div>
+              <div className="text-green-400 text-xs font-semibold mb-2">Connected</div>
+              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
             </div>
           </div>
         </div>
