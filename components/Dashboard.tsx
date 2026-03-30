@@ -75,13 +75,14 @@ export function Dashboard() {
               <h2 className="text-xl font-semibold text-white">Maestro</h2>
             </div>
             <div className="text-gray-300 text-sm">
-              <p className="mb-3">LDS music leadership & flipcharts</p>
+              <p className="mb-3">LDS music direction & hymn leadership</p>
               <div className="space-y-2 text-xs">
                 <div><span className="text-gray-400">Status:</span> <span className="text-yellow-400">Ready</span></div>
                 <div><span className="text-gray-400">Role:</span> <span className="text-white">Music Director</span></div>
+                <div><span className="text-gray-400">Workspace:</span> <span className="text-white">workspace-maestro</span></div>
               </div>
               <div className="mt-4">
-                <a href="https://willowaymedia.vercel.app/flipcharts/login.html" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 text-sm font-semibold">Flipcharts →</a>
+                <a href="https://willowaymedia.vercel.app/flipcharts/login.html" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 text-sm font-semibold">Flipchart Library →</a>
               </div>
             </div>
           </div>
