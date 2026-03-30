@@ -82,7 +82,7 @@ export function Dashboard() {
               </div>
               <div className="flex gap-2 mt-4">
                 <a href="#" className="text-blue-400 hover:text-blue-300 text-sm font-semibold flex-1">View Details →</a>
-                <a href="/flipcharts" className="text-green-400 hover:text-green-300 text-sm font-semibold flex-1">Flipcharts →</a>
+                <a href="https://tuckersmedia.vercel.app" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 text-sm font-semibold flex-1">Flipcharts →</a>
               </div>
             </div>
           </div>
