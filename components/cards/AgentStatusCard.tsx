@@ -72,7 +72,7 @@ export function AgentStatusCard() {
   const agent = selectedAgent ? AGENTS.find(a => a.id === selectedAgent) : null
 
   return (
-    <Card className="col-span-full">
+    <div className="bg-gray-800 rounded-lg border border-gray-700 p-6 col-span-full">
       <div className="flex items-center gap-3 mb-6">
         <span className="text-2xl">🤖</span>
         <h2 className="text-xl font-bold text-white">Agent Control Center</h2>
@@ -159,6 +159,6 @@ export function AgentStatusCard() {
         <strong className="ml-3">Active:</strong> {AGENTS.filter(a => a.status === 'active').length} |
         <strong className="ml-3">Ready:</strong> {AGENTS.filter(a => a.status === 'ready').length}
       </div>
-    </Card>
+    </div>
   )
 }
