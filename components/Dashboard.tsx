@@ -3,8 +3,79 @@
 import { useEffect, useState } from 'react'
 import { Header } from './Header'
 
+type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health'
+
+const agentDetails: Record<AgentId, { name: string; emoji: string; role: string; description: string; workspace: string; status: string; link?: string; linkText?: string }> = {
+  jade: {
+    name: 'Jade',
+    emoji: '💆',
+    role: 'HD Skinn Business Manager',
+    description: 'Manages esthetician services, client bookings, pricing, and business growth for HD Skinn.',
+    workspace: 'workspace-hd-skinn',
+    status: 'Active',
+  },
+  clips: {
+    name: 'Clips',
+    emoji: '🎬',
+    role: 'TikTok Content Director',
+    description: 'Creates viral TikTok content, analyzes trends, and manages short-form video strategy.',
+    workspace: 'workspace-clips',
+    status: 'Active',
+  },
+  polish: {
+    name: 'Polish',
+    emoji: '💅',
+    role: 'Nails by Avery Manager',
+    description: 'Manages nail salon services, client appointments, and business operations for Nails by Avery.',
+    workspace: 'workspace-polish',
+    status: 'Ready',
+  },
+  maker: {
+    name: 'Maker',
+    emoji: '🖨️',
+    role: '3D Printing & Manufacturing',
+    description: 'Manages That\'s God 3D printing projects, Etsy orders, and production workflow.',
+    workspace: 'workspace-3d-printing',
+    status: 'Active',
+  },
+  maestro: {
+    name: 'Maestro',
+    emoji: '🎵',
+    role: 'LDS Music Leadership',
+    description: 'Directs music for LDS services, manages hymn selections, and creates flipcharts for Primary lessons.',
+    workspace: 'workspace-maestro',
+    status: 'Ready',
+    link: 'https://willowaymedia.vercel.app/flipcharts/login.html',
+    linkText: 'Flipchart Library',
+  },
+  lexicon: {
+    name: 'Lexicon',
+    emoji: '📖',
+    role: 'Archive & Search Manager',
+    description: 'Indexes and searches your 6TB personal archive using semantic and full-text search.',
+    workspace: 'workspace-archive',
+    status: 'Active',
+  },
+  gamemaster: {
+    name: 'Game Master',
+    emoji: '🎮',
+    role: 'Game Design & Development',
+    description: 'Designs games and manages Godot game development projects (Turntable & Microphone game).',
+    workspace: 'workspace-game-master',
+    status: 'Ready',
+  },
+  health: {
+    name: 'Health Tracker',
+    emoji: '💚',
+    role: 'Health Data Dashboard',
+    description: 'Displays and tracks health metrics from your connected health app.',
+    workspace: 'health-tracker',
+    status: 'Connected',
+  },
+}
 
 export function Dashboard() {
+  const [expandedAgent, setExpandedAgent] = useState<AgentId | null>(null)
   const [archiveStats, setArchiveStats] = useState({
     totalFiles: 0,
     lastIndexed: 'Never',
@@ -18,6 +89,15 @@ export function Dashboard() {
       lastIndexed: new Date().toLocaleDateString(),
     })
   }, [])
+
+  const handleCardClick = (agentId: AgentId) => {
+    setExpandedAgent(expandedAgent === agentId ? null : agentId)
+    // Scroll to details section
+    setTimeout(() => {
+      const element = document.getElementById(`details-${agentId}`)
+      element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
@@ -47,93 +127,98 @@ export function Dashboard() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {/* Jade - HD Skinn */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-pink-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
-            <div className="text-center">
-              <span className="text-2xl block mb-1">💆</span>
-              <h3 className="font-bold text-white text-sm mb-1">Jade</h3>
-              <p className="text-gray-400 text-xs mb-2">HD Skinn</p>
-              <div className="text-green-400 text-xs font-semibold mb-2">Active</div>
-              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
-            </div>
-          </div>
+          {(['jade', 'clips', 'polish', 'maker', 'maestro', 'lexicon', 'gamemaster', 'health'] as AgentId[]).map((agentId) => {
+            const agent = agentDetails[agentId]
+            const borderColors: Record<AgentId, string> = {
+              jade: 'hover:border-pink-500',
+              clips: 'hover:border-purple-500',
+              polish: 'hover:border-red-500',
+              maker: 'hover:border-orange-500',
+              maestro: 'hover:border-blue-500',
+              lexicon: 'hover:border-cyan-500',
+              gamemaster: 'hover:border-green-500',
+              health: 'hover:border-green-500',
+            }
+            
+            return (
+              <button
+                key={agentId}
+                onClick={() => handleCardClick(agentId)}
+                className={`bg-gray-800 rounded-lg border border-gray-700 ${borderColors[agentId]} transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 active:scale-95 ${expandedAgent === agentId ? 'ring-2 ring-blue-500' : ''}`}
+              >
+                <div className="text-center">
+                  <span className="text-2xl block mb-1">{agent.emoji}</span>
+                  <h3 className="font-bold text-white text-sm mb-1">{agent.name}</h3>
+                  <p className="text-gray-400 text-xs mb-2">{agent.role.split(' ')[0]}</p>
+                  <div className={`text-xs font-semibold mb-2 ${agent.status === 'Active' ? 'text-green-400' : agent.status === 'Ready' ? 'text-yellow-400' : 'text-blue-400'}`}>
+                    {agent.status}
+                  </div>
+                  <div className="text-blue-400 text-xs">Tap to see details</div>
+                </div>
+              </button>
+            )
+          })}
+        </div>
 
-          {/* Clips - TikTok */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-purple-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
-            <div className="text-center">
-              <span className="text-2xl block mb-1">🎬</span>
-              <h3 className="font-bold text-white text-sm mb-1">Clips</h3>
-              <p className="text-gray-400 text-xs mb-2">TikTok Director</p>
-              <div className="text-green-400 text-xs font-semibold mb-2">Active</div>
-              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
-            </div>
-          </div>
+        {/* Details Sections */}
+        <div className="mt-12 space-y-8">
+          {(['jade', 'clips', 'polish', 'maker', 'maestro', 'lexicon', 'gamemaster', 'health'] as AgentId[]).map((agentId) => {
+            const agent = agentDetails[agentId]
+            if (expandedAgent !== agentId) return null
+            
+            return (
+              <div
+                key={`details-${agentId}`}
+                id={`details-${agentId}`}
+                className="bg-gray-800 rounded-lg border-2 border-blue-500 p-6 animate-in fade-in slide-in-from-top-4"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-5xl">{agent.emoji}</span>
+                  <div>
+                    <h2 className="text-3xl font-bold text-white">{agent.name}</h2>
+                    <p className="text-blue-300">{agent.role}</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-3 text-gray-300">
+                  <p className="text-base leading-relaxed">{agent.description}</p>
+                  
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-700">
+                    <div>
+                      <p className="text-gray-400 text-sm font-semibold">Status</p>
+                      <p className={`text-lg font-bold ${agent.status === 'Active' ? 'text-green-400' : agent.status === 'Ready' ? 'text-yellow-400' : 'text-blue-400'}`}>
+                        {agent.status}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400 text-sm font-semibold">Workspace</p>
+                      <p className="text-white font-mono text-sm">{agent.workspace}</p>
+                    </div>
+                  </div>
 
-          {/* Polish - Nails */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-red-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
-            <div className="text-center">
-              <span className="text-2xl block mb-1">💅</span>
-              <h3 className="font-bold text-white text-sm mb-1">Polish</h3>
-              <p className="text-gray-400 text-xs mb-2">Nails by Avery</p>
-              <div className="text-yellow-400 text-xs font-semibold mb-2">Ready</div>
-              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
-            </div>
-          </div>
+                  {agent.link && (
+                    <div className="pt-4 border-t border-gray-700">
+                      <a
+                        href={agent.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded transition-colors"
+                      >
+                        → {agent.linkText}
+                      </a>
+                    </div>
+                  )}
+                </div>
 
-          {/* Maker - 3D */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-orange-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
-            <div className="text-center">
-              <span className="text-2xl block mb-1">🖨️</span>
-              <h3 className="font-bold text-white text-sm mb-1">Maker</h3>
-              <p className="text-gray-400 text-xs mb-2">3D Printing</p>
-              <div className="text-green-400 text-xs font-semibold mb-2">Active</div>
-              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
-            </div>
-          </div>
-
-          {/* Maestro - Music */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-blue-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
-            <div className="text-center">
-              <span className="text-2xl block mb-1">🎵</span>
-              <h3 className="font-bold text-white text-sm mb-1">Maestro</h3>
-              <p className="text-gray-400 text-xs mb-2">Music Leader</p>
-              <div className="text-yellow-400 text-xs font-semibold mb-2">Ready</div>
-              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
-            </div>
-          </div>
-
-          {/* Lexicon - Archive */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-cyan-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
-            <div className="text-center">
-              <span className="text-2xl block mb-1">📖</span>
-              <h3 className="font-bold text-white text-sm mb-1">Lexicon</h3>
-              <p className="text-gray-400 text-xs mb-2">Archive Search</p>
-              <div className="text-green-400 text-xs font-semibold mb-2">Active</div>
-              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
-            </div>
-          </div>
-
-          {/* Game Master - Games */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-green-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
-            <div className="text-center">
-              <span className="text-2xl block mb-1">🎮</span>
-              <h3 className="font-bold text-white text-sm mb-1">Game Master</h3>
-              <p className="text-gray-400 text-xs mb-2">Game Design</p>
-              <div className="text-yellow-400 text-xs font-semibold mb-2">Ready</div>
-              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
-            </div>
-          </div>
-
-          {/* Health Tracker */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-green-500 transition-all hover:shadow-lg p-3 cursor-pointer hover:bg-gray-750 group">
-            <div className="text-center">
-              <span className="text-2xl block mb-1">💚</span>
-              <h3 className="font-bold text-white text-sm mb-1">Health</h3>
-              <p className="text-gray-400 text-xs mb-2">Tracker</p>
-              <div className="text-green-400 text-xs font-semibold mb-2">Connected</div>
-              <div className="text-blue-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click for details →</div>
-            </div>
-          </div>
+                <button
+                  onClick={() => setExpandedAgent(null)}
+                  className="mt-6 text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  ← Close details
+                </button>
+              </div>
+            )
+          })}
         </div>
       </main>
     </div>
