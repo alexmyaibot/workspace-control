@@ -5,9 +5,7 @@ import { Header } from './Header'
 import { CardGrid } from './CardGrid'
 import { ArchiveCard as ArchiveSearchCard } from './cards/ArchiveCard'
 import { HealthTrackerCard } from './cards/HealthTrackerCard'
-import { FlipchartsCard } from './cards/FlipchartsCard'
 import { JadeHDSkinnCard } from './cards/JadeHDSkinnCard'
-import { GameMasterCard } from './cards/GameMasterCard'
 import { TikTokClipsCard } from './cards/TikTokClipsCard'
 import { AgentStatusCard } from './cards/AgentStatusCard'
 
@@ -85,10 +83,22 @@ export function Dashboard() {
               <a href="#" className="text-blue-400 hover:text-blue-300 text-sm font-semibold mt-4 block">View Details →</a>
             </div>
           </div>
+          <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-gray-600 transition-all hover:shadow-lg p-6 h-full">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-2xl">🎮</span>
+              <h2 className="text-xl font-semibold text-white">Game Master</h2>
+            </div>
+            <div className="text-gray-300 text-sm">
+              <p className="mb-3">Game design and Godot development</p>
+              <div className="space-y-2 text-xs">
+                <div><span className="text-gray-400">Status:</span> <span className="text-yellow-400">Ready</span></div>
+                <div><span className="text-gray-400">Project:</span> <span className="text-white">Turntable & Microphone</span></div>
+              </div>
+              <a href="#" className="text-blue-400 hover:text-blue-300 text-sm font-semibold mt-4 block">View Details →</a>
+            </div>
+          </div>
           <ArchiveSearchCard />
           <HealthTrackerCard />
-          <FlipchartsCard />
-          <GameMasterCard />
         </CardGrid>
       </main>
     </div>

@@ -73,6 +73,16 @@ const AGENTS = [
     workspace: 'workspace-archive',
     model: 'qwen3.5:9b',
     description: '6TB archive indexing and semantic search'
+  },
+  {
+    id: 'game-master',
+    name: 'Game Master',
+    emoji: '🎮',
+    role: 'Game Designer',
+    status: 'ready',
+    workspace: 'workspace-game-master',
+    model: 'gemma3:4b',
+    description: 'Game concept design and development (Godot)'
   }
 ]
 
