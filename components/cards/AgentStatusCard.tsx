@@ -63,6 +63,16 @@ const AGENTS = [
     workspace: 'workspace-maestro',
     model: 'qwen3.5:9b',
     description: 'LDS music direction'
+  },
+  {
+    id: 'lexicon',
+    name: 'Lexicon',
+    emoji: '📖',
+    role: 'Archive & Search',
+    status: 'active',
+    workspace: 'workspace-archive',
+    model: 'qwen3.5:9b',
+    description: '6TB archive indexing and semantic search'
   }
 ]
 
