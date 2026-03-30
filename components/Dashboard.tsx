@@ -7,7 +7,6 @@ import { ArchiveCard as ArchiveSearchCard } from './cards/ArchiveCard'
 import { HealthTrackerCard } from './cards/HealthTrackerCard'
 import { JadeHDSkinnCard } from './cards/JadeHDSkinnCard'
 import { TikTokClipsCard } from './cards/TikTokClipsCard'
-import { AgentStatusCard } from './cards/AgentStatusCard'
 
 export function Dashboard() {
   const [archiveStats, setArchiveStats] = useState({
@@ -28,9 +27,37 @@ export function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        {/* CTO Dashboard - Alex on top */}
-        <div className="mb-8">
-          <AgentStatusCard />
+        {/* CTO Hero Card - Alex on top (full width, larger) */}
+        <div className="mb-12 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 rounded-lg border-2 border-blue-600 hover:border-blue-500 transition-all hover:shadow-2xl p-8">
+          <div className="flex items-center gap-6 mb-6">
+            <span className="text-6xl">🤖</span>
+            <div>
+              <h1 className="text-4xl font-bold text-white">Alex</h1>
+              <p className="text-blue-200 text-lg">Chief Technology Officer</p>
+            </div>
+          </div>
+          <div className="text-blue-100 mb-6 grid grid-cols-2 gap-6">
+            <div>
+              <p className="text-blue-300 text-sm font-semibold">Status</p>
+              <p className="text-white text-lg font-bold">🟢 Active</p>
+            </div>
+            <div>
+              <p className="text-blue-300 text-sm font-semibold">Model</p>
+              <p className="text-white text-lg font-bold">qwen3.5:9b</p>
+            </div>
+            <div>
+              <p className="text-blue-300 text-sm font-semibold">Agents Managed</p>
+              <p className="text-white text-lg font-bold">8 Subagents</p>
+            </div>
+            <div>
+              <p className="text-blue-300 text-sm font-semibold">Workspace</p>
+              <p className="text-white text-lg font-bold">workspace-main</p>
+            </div>
+          </div>
+          <p className="text-blue-100 text-base leading-relaxed">
+            AI operations lead managing all subagents (Jade, Clips, Polish, Maker, Maestro, Lexicon, Game Master). 
+            Handles infrastructure, automation, cron jobs, and system health. Runs nightly audits via Sentinel.
+          </p>
         </div>
 
         {/* Subagent Cards Grid */}
