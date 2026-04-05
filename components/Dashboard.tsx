@@ -81,7 +81,7 @@ const agentDetails: Record<AgentId, {
     status: 'Ready',
     model: 'qwen3.5:9b (Ollama)',
     tasks: ['Plan next month\'s hymns', 'Create new flipcharts', 'Prepare practice materials'],
-    link: 'https://willowaymedia.vercel.app/flipcharts/login.html',
+    link: 'https://flipcharts.vercel.app/login.html',
     linkText: 'Flipchart Library',
   },
   lexicon: {
