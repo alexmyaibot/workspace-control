@@ -3,14 +3,8 @@
 import { useEffect, useState } from 'react'
 import { Header } from './Header'
 import { AgentSidebar } from './AgentSidebar'
-import dynamic from 'next/dynamic'
 
 type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health' | 'ascent'
-
-const AgentNetworkDiagram = dynamic(() => import('./AgentNetworkDiagram').then(mod => mod.AgentNetworkDiagram), {
-  ssr: false,
-  loading: () => <div className="w-full h-full flex items-center justify-center text-gray-400">Loading network diagram...</div>
-})
 
 const agentDetails: Record<AgentId, { 
   name: string
@@ -134,7 +128,7 @@ const agentDetails: Record<AgentId, {
 }
 
 export function Dashboard() {
-  const [expandedAgent, setExpandedAgent] = useState<AgentId | null>(null)
+  const [expandedAgent, setExpandedAgent] = useState<AgentId | null>('clips')
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [healthData, setHealthData] = useState({
     current_lbs: 210,
@@ -167,7 +161,7 @@ export function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex flex-col">
       <Header />
       <div className="flex-1 flex overflow-hidden">
-        {/* Left Sidebar - Mobile Responsive */}
+        {/* Left Sidebar - Agent List */}
         <AgentSidebar
           selectedAgent={expandedAgent}
           onSelectAgent={setExpandedAgent}
@@ -175,73 +169,119 @@ export function Dashboard() {
           onToggle={() => setSidebarOpen(!sidebarOpen)}
         />
 
-        {/* Right Content Area - Network Diagram + Details */}
-        <main className="flex-1 overflow-y-auto">
-          <div className="h-full flex flex-col">
-            {/* Network Diagram (takes up most space) */}
-            <div className="flex-1 border-b border-gray-700">
-              <AgentNetworkDiagram
-                selectedAgent={expandedAgent}
-                onSelectAgent={setExpandedAgent}
-              />
-            </div>
+        {/* Right Content Area - Agent Details */}
+        <main className="flex-1 overflow-y-auto p-8">
+          {expandedAgent ? (
+            (() => {
+              const agent = agentDetails[expandedAgent]
+              return (
+                <div className="max-w-4xl">
+                  {/* Header */}
+                  <div className="flex items-start gap-6 mb-8">
+                    <span className="text-7xl">{agent.emoji}</span>
+                    <div className="flex-1">
+                      <h1 className="text-4xl font-bold text-white mb-2">{agent.name}</h1>
+                      <p className="text-xl text-blue-300 mb-4">{agent.role}</p>
+                      <p className="text-gray-400">{agent.description}</p>
+                    </div>
+                  </div>
 
-            {/* Agent Details Panel (bottom, collapsible) */}
-            {expandedAgent && (
-              <div className="max-h-80 overflow-y-auto bg-gray-800 border-t border-gray-700 p-6">
-                {(() => {
-                  const agent = agentDetails[expandedAgent]
-                  return (
-                    <div>
-                      <div className="flex items-center gap-4 mb-4">
-                        <span className="text-4xl">{agent.emoji}</span>
-                        <div className="flex-1">
-                          <h2 className="text-2xl font-bold text-white">{agent.name}</h2>
-                          <p className="text-blue-300 text-sm">{agent.role}</p>
-                        </div>
-                        <button
-                          onClick={() => setExpandedAgent(null)}
-                          className="text-gray-400 hover:text-white text-lg"
-                        >
-                          ✕
-                        </button>
-                      </div>
-
-                      <p className="text-gray-300 text-sm mb-4">{agent.description}</p>
-
-                      <div className="grid grid-cols-3 gap-3 text-sm mb-4">
-                        <div>
-                          <p className="text-gray-400 text-xs font-semibold">Status</p>
-                          <p className={`${agent.status === 'Active' ? 'text-green-400' : agent.status === 'Ready' ? 'text-yellow-400' : 'text-blue-400'}`}>
-                            {agent.status}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-gray-400 text-xs font-semibold">Model</p>
-                          <p className="text-white text-xs">{agent.model}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-400 text-xs font-semibold">Workspace</p>
-                          <p className="text-white text-xs font-mono">{agent.workspace}</p>
-                        </div>
-                      </div>
-
-                      {agent.link && (
+                  {/* Key Info Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div className="bg-gray-800 rounded-lg p-4">
+                      <p className="text-gray-400 text-sm font-semibold mb-2">Status</p>
+                      <p className={`text-lg font-bold ${
+                        agent.status === 'Active' ? 'text-green-400' :
+                        agent.status === 'Ready' ? 'text-yellow-400' :
+                        agent.status === 'Live' ? 'text-emerald-400' :
+                        'text-blue-400'
+                      }`}>
+                        {agent.status}
+                      </p>
+                    </div>
+                    <div className="bg-gray-800 rounded-lg p-4">
+                      <p className="text-gray-400 text-sm font-semibold mb-2">Model</p>
+                      <p className="text-white font-mono text-sm">{agent.model}</p>
+                    </div>
+                    <div className="bg-gray-800 rounded-lg p-4">
+                      <p className="text-gray-400 text-sm font-semibold mb-2">Workspace</p>
+                      <p className="text-white font-mono text-xs break-all">{agent.workspace}</p>
+                    </div>
+                    {agent.link && (
+                      <div className="bg-gray-800 rounded-lg p-4">
+                        <p className="text-gray-400 text-sm font-semibold mb-2">Link</p>
                         <a
                           href={agent.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded text-sm transition-colors"
+                          className="text-blue-400 hover:text-blue-300 underline text-sm break-all"
                         >
-                          → {agent.linkText}
+                          Open
                         </a>
-                      )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Tasks */}
+                  <div className="mb-8">
+                    <h2 className="text-2xl font-bold text-white mb-4">Tasks</h2>
+                    <ul className="space-y-2">
+                      {agent.tasks.map((task, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-gray-300">
+                          <span className="text-blue-400 mt-1">→</span>
+                          <span>{task}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Stats */}
+                  {agent.stats && Object.keys(agent.stats).length > 0 && (
+                    <div className="mb-8">
+                      <h2 className="text-2xl font-bold text-white mb-4">Stats</h2>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {Object.entries(agent.stats).map(([key, value]) => (
+                          <div key={key} className="bg-gray-800 rounded-lg p-4">
+                            <p className="text-gray-400 text-sm font-semibold mb-2">{key}</p>
+                            <p className="text-white font-bold text-lg">{value}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  )
-                })()}
-              </div>
-            )}
-          </div>
+                  )}
+
+                  {/* Health Data Special Case */}
+                  {expandedAgent === 'health' && (
+                    <div className="mb-8">
+                      <h2 className="text-2xl font-bold text-white mb-4">Health Metrics</h2>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="bg-gray-800 rounded-lg p-4">
+                          <p className="text-gray-400 text-sm font-semibold mb-2">Current Weight</p>
+                          <p className="text-white font-bold text-lg">{healthData.current_lbs} lbs</p>
+                        </div>
+                        <div className="bg-gray-800 rounded-lg p-4">
+                          <p className="text-gray-400 text-sm font-semibold mb-2">Starting Weight</p>
+                          <p className="text-white font-bold text-lg">{healthData.start_lbs} lbs</p>
+                        </div>
+                        <div className="bg-gray-800 rounded-lg p-4">
+                          <p className="text-gray-400 text-sm font-semibold mb-2">Weight Loss</p>
+                          <p className="text-green-400 font-bold text-lg">{healthData.weight_loss} lbs ✓</p>
+                        </div>
+                        <div className="bg-gray-800 rounded-lg p-4">
+                          <p className="text-gray-400 text-sm font-semibold mb-2">BMI</p>
+                          <p className="text-white font-bold text-lg">{healthData.bmi}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })()
+          ) : (
+            <div className="flex items-center justify-center h-full">
+              <p className="text-gray-400 text-lg">Select an agent from the sidebar to view details</p>
+            </div>
+          )}
         </main>
       </div>
     </div>
