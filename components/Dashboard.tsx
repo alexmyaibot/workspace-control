@@ -206,33 +206,29 @@ export function Dashboard() {
 
         {/* Right Content Area - Agent Details */}
         <main className="flex-1 overflow-y-auto p-8">
-          {/* CEO Header (Top Layer) */}
-          <div className="bg-gradient-to-r from-amber-900 via-amber-800 to-amber-900 rounded-lg border-2 border-amber-600 p-6 mb-6">
-            <div className="flex items-center gap-6">
-              <span className="text-6xl">👑</span>
+          {/* AlexAI CEO Header (Top Layer) - Compact */}
+          <div className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 rounded-lg border border-blue-600 p-3 mb-3">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🤖</span>
               <div className="flex-1">
-                <h1 className="text-3xl font-bold text-white">CEO</h1>
-                <p className="text-amber-200">Tucker Dansie - Chief Executive Officer</p>
-                <p className="text-amber-300 text-sm mt-2">Vision • Strategy • Growth</p>
+                <p className="text-blue-200 text-sm"><span className="font-bold text-white">Alex</span> — CEO & Mission Control</p>
               </div>
             </div>
           </div>
 
-          {/* Sentinel CTO Layer (Oversight) */}
-          <div className="bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 rounded-lg border-2 border-purple-600 p-6 mb-8">
-            <div className="flex items-center gap-6">
-              <span className="text-6xl">🛡️</span>
+          {/* Sentinel CTO Layer (Oversight) - Compact */}
+          <div className="bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 rounded-lg border border-purple-600 p-3 mb-6">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🛡️</span>
               <div className="flex-1">
-                <h1 className="text-3xl font-bold text-white">Sentinel</h1>
-                <p className="text-purple-200">Chief Technology Officer - Autonomous Oversight</p>
-                <p className="text-purple-300 text-sm mt-2">Monitors 9 subagents • Maintains health • Ensures efficiency • Real-time adjustments</p>
+                <p className="text-purple-200 text-sm"><span className="font-bold text-white">Sentinel</span> — CTO • Monitors 9 subagents • Real-time oversight</p>
               </div>
             </div>
           </div>
 
           {/* Subagents Layer */}
-          <div className="mb-8">
-            <h2 className="text-lg font-bold text-gray-300 mb-4">🚀 Active Subagents</h2>
+          <div className="mb-4">
+            <h3 className="text-sm font-semibold text-gray-400 mb-3">🚀 SUBAGENTS</h3>
           </div>
 
           {expandedAgent ? (
