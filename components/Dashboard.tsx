@@ -59,7 +59,7 @@ const agentDetails: Record<AgentId, {
     description: 'Manages nail salon services, client appointments, and business operations for Nails by Avery.',
     workspace: 'workspace-polish',
     status: 'Ready',
-    model: 'gemma3:4b',
+    model: 'qwen3.5:9b (Ollama)',
     tasks: ['Finalize service menu', 'Set pricing structure', 'Create booking system'],
   },
   maker: {
@@ -69,7 +69,7 @@ const agentDetails: Record<AgentId, {
     description: 'Manages That\'s God 3D printing projects, Etsy orders, and production workflow.',
     workspace: 'workspace-3d-printing',
     status: 'Active',
-    model: 'qwen3.5:9b',
+    model: 'qwen3.5:9b (Ollama)',
     tasks: ['Review pending Etsy orders', 'Optimize print settings', 'Update product photos'],
   },
   maestro: {
@@ -79,7 +79,7 @@ const agentDetails: Record<AgentId, {
     description: 'Directs music for LDS services, manages hymn selections, and creates flipcharts for Primary lessons.',
     workspace: 'workspace-maestro',
     status: 'Ready',
-    model: 'qwen3.5:9b',
+    model: 'qwen3.5:9b (Ollama)',
     tasks: ['Plan next month\'s hymns', 'Create new flipcharts', 'Prepare practice materials'],
     link: 'https://willowaymedia.vercel.app/flipcharts/login.html',
     linkText: 'Flipchart Library',
@@ -101,7 +101,7 @@ const agentDetails: Record<AgentId, {
     description: 'Designs games and manages Godot game development projects (Turntable & Microphone game).',
     workspace: 'workspace-game-master',
     status: 'Ready',
-    model: 'gemma3:4b',
+    model: 'qwen3.5:9b (Ollama)',
     tasks: ['Define game mechanics', 'Create character designs', 'Build first prototype'],
   },
   health: {
@@ -113,8 +113,25 @@ const agentDetails: Record<AgentId, {
     status: 'Connected',
     model: 'data-sync',
     tasks: ['Sync latest health data from Health app', 'Set up HealthKit API for real-time updates'],
-    // Note: stats are dynamically populated from healthData state in component
     stats: {},
+  },
+  ascent: {
+    name: 'Ascent',
+    emoji: '🧗',
+    role: 'Owen\'s Climbing Tracker',
+    description: 'Climbing time tracker app for Owen. MVP built with Next.js + Supabase. Records route difficulty, time, and photos.',
+    workspace: 'ascent',
+    status: 'Live',
+    model: 'Next.js + Supabase',
+    tasks: ['Track climb times and difficulty', 'Capture photos per climb', 'View climb history'],
+    stats: {
+      'Status': 'MVP Complete',
+      'Backend': 'Supabase',
+      'Frontend': 'Next.js 14',
+      'Features': 'Timer, Logging, History',
+    },
+    link: 'http://localhost:3000',
+    linkText: 'Ascent Tracker',
   },
 }
 
