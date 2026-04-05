@@ -232,7 +232,7 @@ export function Dashboard() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {(['clips', 'maker', 'maestro', 'lexicon', 'gamemaster', 'health', 'jade', 'polish'] as AgentId[]).map((agentId) => {
+          {(['clips', 'maker', 'maestro', 'lexicon', 'gamemaster', 'health', 'jade', 'polish', 'ascent'] as AgentId[]).map((agentId) => {
             const agent = agentDetails[agentId]
             const borderColors: Record<AgentId, string> = {
               jade: 'hover:border-pink-500',
@@ -243,6 +243,7 @@ export function Dashboard() {
               lexicon: 'hover:border-cyan-500',
               gamemaster: 'hover:border-green-500',
               health: 'hover:border-green-500',
+              ascent: 'hover:border-teal-500',
             }
             
             return (
