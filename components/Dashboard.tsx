@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Header } from './Header'
 import { AgentSidebar } from './AgentSidebar'
 
-type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health' | 'ascent'
+type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health' | 'ascent' | 'scholar'
 
 const agentDetails: Record<AgentId, { 
   name: string
@@ -159,6 +159,24 @@ const agentDetails: Record<AgentId, {
     },
     link: 'https://ascent-omega.vercel.app',
     linkText: 'Ascent Tracker',
+  },
+  scholar: {
+    name: 'Scholar',
+    emoji: '📚',
+    role: 'LDS General Conference Researcher',
+    description: 'Scrapes, transcribes, and analyzes LDS General Conference talks. Auto-monitors for new transcripts, generates AI summaries, and tracks trends over time.',
+    workspace: 'workspace-scholar',
+    status: 'Launching',
+    model: 'Claude + Whisper + Supabase',
+    tasks: ['Monitor conference websites daily', 'Transcribe audio recordings', 'Generate talk summaries', 'Track themes & trends'],
+    stats: {
+      'Current Conference': 'April 2026',
+      'Scraper': 'Auto-monitoring',
+      'Database': 'Supabase',
+      'Focus': 'Summaries + Trends',
+    },
+    link: 'https://scholar.vercel.app',
+    linkText: 'Scholar Dashboard',
   },
 }
 
