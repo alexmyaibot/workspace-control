@@ -206,6 +206,18 @@ export function Dashboard() {
 
         {/* Right Content Area - Agent Details */}
         <main className="flex-1 overflow-y-auto p-8">
+          {/* AlexAI CTO Header */}
+          <div className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 rounded-lg border-2 border-blue-600 p-6 mb-8">
+            <div className="flex items-center gap-6">
+              <span className="text-6xl">🤖</span>
+              <div className="flex-1">
+                <h1 className="text-3xl font-bold text-white">Alex</h1>
+                <p className="text-blue-200">Chief Technology Officer & Mission Control</p>
+                <p className="text-blue-300 text-sm mt-2">Managing 9 subagents • 12 deployed skills • Real-time monitoring</p>
+              </div>
+            </div>
+          </div>
+
           {expandedAgent ? (
             (() => {
               const agent = agentDetails[expandedAgent]
