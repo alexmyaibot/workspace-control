@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health' | 'ascent'
+type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health' | 'ascent' | 'scholar'
 
 interface Agent {
   id: AgentId
@@ -23,6 +23,7 @@ const agents: Agent[] = [
   { id: 'gamemaster', name: 'GameMaster', emoji: '🎮', workspace: 'Games', model: 'qwen3.5:9b', status: 'Ready' },
   { id: 'health', name: 'Health', emoji: '💚', workspace: 'Health Tracker', model: 'data-sync', status: 'Connected' },
   { id: 'ascent', name: 'Ascent', emoji: '🧗', workspace: 'Climbing Tracker', model: 'Next.js+Supabase', status: 'Live' },
+  { id: 'scholar', name: 'Scholar', emoji: '📚', workspace: 'LDS Conference', model: 'Claude+Whisper', status: 'Active' },
 ]
 
 interface AgentSidebarProps {
