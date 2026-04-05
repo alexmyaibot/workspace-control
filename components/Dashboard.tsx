@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Header } from './Header'
 
-type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health'
+type AgentId = 'jade' | 'clips' | 'polish' | 'maker' | 'maestro' | 'lexicon' | 'gamemaster' | 'health' | 'ascent'
 
 const agentDetails: Record<AgentId, { 
   name: string
@@ -25,7 +25,7 @@ const agentDetails: Record<AgentId, {
     description: 'Manages esthetician services, client bookings, pricing, and business growth for HD Skinn.',
     workspace: 'workspace-hd-skinn',
     status: 'Active',
-    model: 'gemma3:4b',
+    model: 'qwen3.5:9b (Ollama)',
     tasks: ['Schedule client consultations', 'Update pricing packages', 'Create social media content'],
   },
   clips: {
@@ -35,7 +35,7 @@ const agentDetails: Record<AgentId, {
     description: 'Creates viral TikTok content, analyzes trends, and manages short-form video strategy.',
     workspace: 'workspace-clips',
     status: 'Active',
-    model: 'phi4-mini',
+    model: 'gemma4:e4b (Ollama)',
     tasks: ['Produce Ghost Elephant video', 'Analyze trending audio', 'Plan content calendar'],
     stats: {
       'Followers': '12.4K',
@@ -91,7 +91,7 @@ const agentDetails: Record<AgentId, {
     description: 'Indexes and searches your 6TB personal archive using semantic and full-text search.',
     workspace: 'workspace-archive',
     status: 'Active',
-    model: 'qwen3.5:9b',
+    model: 'gemma4:e4b (Ollama)',
     tasks: ['Continue 6TB archive indexing', 'Test semantic search', 'Optimize search performance'],
   },
   gamemaster: {
