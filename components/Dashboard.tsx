@@ -130,7 +130,7 @@ const agentDetails: Record<AgentId, {
       'Frontend': 'Next.js 14',
       'Features': 'Timer, Logging, History',
     },
-    link: 'http://localhost:3000',
+    link: 'https://ascent-omega.vercel.app',
     linkText: 'Ascent Tracker',
   },
 }
